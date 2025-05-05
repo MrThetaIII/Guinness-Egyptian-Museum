@@ -1,0 +1,110 @@
+/*  
+  We utilize clamp() to fluidly scale widths, heights, spacings, and font sizes.
+  This ensures a consistent layout from mobile all the way up to large desktops.
+*/
+
+/* 1) Global & Body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Cinzel', serif;
+    
+    /* Light-blue background with a subtle repeating diagonal pattern */
+    background-color: #e0f7fa;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.15) 0,
+      rgba(255, 255, 255, 0.15) 1px,
+      transparent 1px,
+      transparent 10px
+    );
+  
+    /* Center the content with Flexbox */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Ensure it fills the full viewport height */
+  }
+  
+  /* 2) Card Container */
+  .card {
+    /* 
+      Let the card's width vary from 300px (min) up to 600px (max), 
+      guided by 80% of the viewport width in between.
+    */
+    width: clamp(300px, 80vw, 600px);
+  
+    /* 
+      Vertical/horizontal padding also scales: 
+      min 1rem, 
+      anything in between 5% of viewport width, 
+      up to a max of 2.5rem.
+    */
+    padding: clamp(1rem, 5vw, 2.5rem);
+  
+    background: rgba(255, 255, 255, 0.9);
+    /* Round corners scale from 12px to 28px */
+    border-radius: clamp(12px, 5vw, 28px);
+    
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    text-align: center;
+  }
+  
+  /* 3) Logo */
+  .logo {
+    /* 
+      Force the logo's width to grow between 130px and 280px,
+      guided by half (50%) the viewport width in the middle.
+    */
+    width: clamp(130px, 50vw, 280px);
+    
+    display: block;
+    margin: 0 auto;
+    
+    /* 
+      Gap below the logo: min 1rem, up to 2rem, guided by 4vw 
+    */
+    margin-bottom: clamp(1rem, 4vw, 2rem);
+  }
+  
+  /* 4) Social Media Icons */
+  .social-links {
+    /* 
+      Gaps scale from 0.75rem to 2rem, 
+      guided by 4vw 
+    */
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.75rem, 4vw, 2rem);
+  }
+  
+  .social-links a {
+    /* 
+      Icon button diameter:
+      min 48px, up to 80px, guided by 12% viewport width 
+    */
+    width: clamp(48px, 12vw, 80px);
+    height: clamp(48px, 12vw, 80px);
+  
+    background-color: #ffca28; /* gold accent */
+    color: #000;
+    border-radius: 50%;
+    text-decoration: none;
+  
+    /* 
+      Icon size—1.2rem to 2.25rem, 
+      guided by 5vw in the middle
+    */
+    font-size: clamp(1.2rem, 5vw, 2.25rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease, transform 0.15s ease;
+  }
+  
+  .social-links a:hover {
+    background-color: #ffb300; /* slightly darker gold */
+    transform: translateY(-2px);
+  }
